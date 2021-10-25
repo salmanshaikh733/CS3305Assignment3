@@ -14,28 +14,62 @@
 
 
 int port[2];
+
 int sharedResource = 0;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-/*void *sum(void *thread_id) {
+void *sum(void *thread_id) {
     //hold pipeData
-    char pipeData[100] ="";
+    char pipeData[50] ="";
     //read from pipe and store in pipeData
-    read(port[0],pipeData,100);
+    read(port[0],pipeData,50);
 
-    int X = strtol()
+    //int X = strtol()
 
 
-}*/
+}
+
+void *odd_even(void *thread_id) {
+
+}
+
+void *digit_count(void *thread_id) {
+
+}
 
 int main(int argc, const char * argv[]) {
 
     const pid_t parentId = getpid();
 
-    const char* X = argv[1];
-    const char* Y = argv[2];
+     char* X = argv[1];
+     char* Y = argv[2];
 
-    printf("parent (PID %d) receives X=%S, Y=%S from the user\n",parentId,X,Y);
+    printf("parent (PID %d) receives X=%s and Y=%s from the user\n",parentId,X,Y);
+
+    //concat args to pipe data
+    char pipeData[50] = "";
+    strcat(pipeData,X);
+    strcat(pipeData,",");
+    strcat(pipeData,Y);
+    pipe(port);
+
+    //write to pipe
+    printf("parent (PID %d) writes X=%s and Y=%s to the pipe\n",parentId,X,Y);
+    write(port[1],pipeData,50);
+
+    //make threads
+    pthread_t thread_1 =100;
+    pthread_t thread_2 =101;
+    pthread_t thread_3 =102;
+
+    pthread_create(&thread_1, NULL, &sum, NULL);
+    pthread_join(thread_1, NULL);
+
+    pthread_create(&thread_2, NULL, &odd_even, NULL);
+    pthread_join(thread_2, NULL);
+
+    pthread_create(&thread_3, NULL, &digit_count, NULL);
+    pthread_join(thread_3, NULL);
 
     return 0;
 }
