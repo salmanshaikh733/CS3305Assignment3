@@ -77,15 +77,15 @@ void *digit_count(void *thread_id) {
 
     int count = strlen(pipeData);
 
-    printf("thread (TID 102) identifies X+Y =%d as a %d digit number\n",sum,count);
+    printf("thread (TID 102) identifies X+Y = %d as a %d digit number\n",sum,count);
 
     return NULL;
 }
 
 int main(int argc, const char * argv[]) {
 
-     char* X = argv[1];
-     char* Y = argv[2];
+    const char* X = argv[1];
+    const char* Y = argv[2];
 
     printf("parent (PID %d) receives X=%s and Y=%s from the user\n",getpid(),X,Y);
 
