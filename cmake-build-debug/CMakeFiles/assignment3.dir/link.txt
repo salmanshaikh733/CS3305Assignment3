@@ -1,1 +1,1 @@
-/usr/bin/cc -g CMakeFiles/assignment3.dir/main.c.o -o assignment3 
+/usr/bin/cc -g   CMakeFiles/assignment3.dir/main.c.o  -o assignment3 
